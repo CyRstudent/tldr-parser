@@ -1,0 +1,25 @@
+{
+  "name": "tldr-parser",
+  "version": "0.0.0",
+  "description": "A TypeScript-based parser for the tldr CLI",
+  "keywords": [
+    "parser",
+    "cli",
+    "tldr",
+    "ts"
+  ],
+  "homepage": "https://github.com/PipsaDevs/tldr-parser#readme",
+  "bugs": {
+    "url": "https://github.com/PipsaDevs/tldr-parser/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PipsaDevs/tldr-parser.git"
+  },
+  "author": "PipsaDevs",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

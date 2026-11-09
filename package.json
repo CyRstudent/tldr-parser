@@ -29,5 +29,12 @@
       "onFail": "download"
     }
   },
-  "packageManager": "pnpm@12.18.0"
+  "packageManager": "pnpm@12.18.0",
+  "dependencies": {
+    "execa": "^10.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2"
+  }
 }

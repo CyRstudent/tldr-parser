@@ -1,5 +1,5 @@
 import parseRaw from "./parser.js";
-import type { Example, TLDRInfo } from "./types.js";
+import type { TLDRInfo } from "./types.js";
 
 import { execa, ExecaError } from "execa";
 

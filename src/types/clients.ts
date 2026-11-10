@@ -22,3 +22,9 @@ export const CLIENT_STRATEGIES: Record<TLDRClient, ClientStrategy> = {
 		isPageNotFound: (errmsg) => checkLowerCase(errmsg, "page not found"),
 	},
 };
+
+export interface ParseOptions {
+	client?: TLDRClient;
+	binary?: string;
+	stripUsage?: boolean;
+}

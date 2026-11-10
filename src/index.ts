@@ -1,3 +1,4 @@
+import parseRaw from "./parser.js";
 import type { Example, TLDRInfo } from "./types.js";
 
 import { execa, ExecaError } from "execa";
@@ -39,35 +40,5 @@ export default async function parse(query: string): Promise<TLDRInfo> {
 		}
 		throw err;
 	}
-
-	const lines = output.stdout.split("\n");
-	let name = "";
-	const descLines: string[] = [];
-	const examples: Example[] = [];
-
-	let currentExample = "";
-	for (let l of lines) {
-		l = l.trim();
-		if (l.startsWith("# ")) {
-			name = l.replace(/^#\s+/, "");
-		} else if (l.startsWith("> ")) {
-			descLines.push(l.replace(/^>\s+/, ""));
-		} else if (l.startsWith("- ")) {
-			currentExample = l.replace(/^-\s+/, "");
-		} else {
-			if (currentExample) {
-				examples.push({
-					description: currentExample,
-					usage: l,
-				});
-				currentExample = "";
-			}
-		}
-	}
-	const obj: TLDRInfo = {
-		name: name,
-		description: descLines.join("\n"),
-		examples: examples,
-	};
-	return obj;
+	return parseRaw(output.stdout);
 }

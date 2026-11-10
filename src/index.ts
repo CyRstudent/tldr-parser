@@ -1,6 +1,6 @@
 import type { Example, TLDRInfo } from "./types.js";
 
-import { execa } from "execa";
+import { execa, ExecaError } from "execa";
 
 export default async function parse(query: string): Promise<TLDRInfo> {
 	// Step 1: Check for possible injections
@@ -23,7 +23,22 @@ export default async function parse(query: string): Promise<TLDRInfo> {
 	}
 
 	const splt = sanitized.split(/\s+/);
-	const output = await execa("tldr", ["-R", "--", ...splt]);
+	let output;
+	try {
+		output = await execa("tldr", ["-R", "--", ...splt]);
+	} catch (err) {
+		if (err instanceof ExecaError) {
+			const splt = err.message.split("\n");
+			if (splt[2]?.startsWith("error: page not found")) {
+				return {
+					name: "Command not found",
+					description: "",
+					examples: [],
+				};
+			}
+		}
+		throw err;
+	}
 
 	const lines = output.stdout.split("\n");
 	let name = "";

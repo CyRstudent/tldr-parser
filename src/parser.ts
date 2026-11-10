@@ -1,6 +1,9 @@
 import type { TLDRInfo, Example } from "./types.js";
 
-export default function parseRaw(stdoutRaw: string): TLDRInfo {
+export default function parseRaw(
+	stdoutRaw: string,
+	stripUsage: boolean = true,
+): TLDRInfo {
 	const lines = stdoutRaw.split("\n");
 	let name = "";
 	const descLines: string[] = [];
@@ -16,14 +19,12 @@ export default function parseRaw(stdoutRaw: string): TLDRInfo {
 			descLines.push(l.replace(/^>\s+/, ""));
 		} else if (l.startsWith("- ")) {
 			currentExample = l.replace(/^-\s+/, "");
-		} else {
-			if (currentExample) {
-				examples.push({
-					description: currentExample,
-					usage: l,
-				});
-				currentExample = "";
-			}
+		} else if (currentExample) {
+			examples.push({
+				description: currentExample,
+				usage: stripUsage ? l.replace(/^`+\`+$/, "").trim() : l,
+			});
+			currentExample = "";
 		}
 	}
 	const obj: TLDRInfo = {

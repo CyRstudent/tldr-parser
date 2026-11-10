@@ -1,4 +1,4 @@
-import type { TLDRInfo, Example } from "./types.js";
+import type { TLDRInfo, Example } from "./types/index.js";
 
 export default function parseRaw(
 	stdoutRaw: string,

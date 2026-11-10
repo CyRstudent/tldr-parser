@@ -63,3 +63,6 @@ export default async function parse(
 	}
 	return parseRaw(output.stdout, options.stripUsage ?? true);
 }
+
+export * from "./types/index.js";
+export * from "./errors/index.js";

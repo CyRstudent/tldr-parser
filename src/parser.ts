@@ -9,6 +9,7 @@ export default function parseRaw(stdoutRaw: string): TLDRInfo {
 	let currentExample = "";
 	for (let l of lines) {
 		l = l.trim();
+		if (!l) continue;
 		if (l.startsWith("# ")) {
 			name = l.replace(/^#\s+/, "");
 		} else if (l.startsWith("> ")) {

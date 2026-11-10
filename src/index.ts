@@ -1,44 +1,65 @@
+// Main parse logic
 import parseRaw from "./parser.js";
-import type { TLDRInfo } from "./types/index.js";
+
+// Types and interfaces
+import {
+	CLIENT_STRATEGIES,
+	type TLDRClient,
+	type TLDRInfo,
+	type ParseOptions,
+} from "./types/index.js";
+
+// Custom error classes
+import { InvalidQueryError, PageNotFoundError } from "./errors/index.js";
 
 import { execa, ExecaError } from "execa";
 
-export default async function parse(query: string): Promise<TLDRInfo> {
+const reg = /^[a-zA-Z0-9_\-+\s]{1,50}$/;
+
+export default async function parse(
+	query: string,
+	options: ParseOptions = {},
+): Promise<TLDRInfo> {
 	// Step 1: Check for possible injections
 	const sanitized = query.trim();
+	if (!sanitized) {
+		throw new InvalidQueryError(query, "Query cannot be empty");
+	}
 
-	/**
-	 * The RegEx contains the following checks:
-	 * Only alphanumeric characters
-	 * Hyphens allowed
-	 * String length l such that 1 <= l <= 50 to prevent massive, memory-overloading inputs
-	 */
-	const reg = /^[a-zA-Z0-9_\-\s]{1,50}$/;
 	if (!reg.test(sanitized)) {
-		throw new Error(
-			"The query must be alphanumeric (hyphens allowed) and 1 <= query.length <=50",
+		throw new InvalidQueryError(
+			query,
+			"The query must be alphanumeric (hyphens and + allowed), and between 1 and 50 chars",
 		);
 	}
 	if (sanitized.startsWith("-")) {
-		throw new Error("Query must not start with a hyphen");
+		throw new InvalidQueryError(
+			query,
+			"The query must not start with a hyphen",
+		);
 	}
 
-	const splt = sanitized.split(/\s+/);
+	if (!options.client) {
+		options.client = "tlrc";
+	}
+	if (!options.binary) {
+		options.binary = "tldr";
+	}
+	const strat = CLIENT_STRATEGIES[options.client];
+
+	const queryArgs = sanitized.split(/\s+/);
+	const args = strat.buildArgs(queryArgs);
+
 	let output;
 	try {
-		output = await execa("tldr", ["-R", "--", ...splt]);
+		output = await execa(options.binary, args);
 	} catch (err) {
 		if (err instanceof ExecaError) {
-			const splt = err.message.split("\n");
-			if (splt[2]?.startsWith("error: page not found")) {
-				return {
-					name: "Command not found",
-					description: "",
-					examples: [],
-				};
+			if (strat.isPageNotFound(err.message)) {
+				throw new PageNotFoundError(sanitized, { cause: err });
 			}
 		}
 		throw err;
 	}
-	return parseRaw(output.stdout);
+	return parseRaw(output.stdout, options.stripUsage ?? true);
 }

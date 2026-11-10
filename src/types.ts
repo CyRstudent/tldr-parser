@@ -8,3 +8,12 @@ export interface TLDRInfo {
 	description: string;
 	examples: Example[];
 }
+
+export const SUPPORTED_CLIENTS = [
+	"tlrc",
+	"tealdeer",
+	"tldr-python-client",
+	"tldr-ts",
+];
+
+export type TLDRClient = (typeof SUPPORTED_CLIENTS)[number];

@@ -17,3 +17,8 @@ export const SUPPORTED_CLIENTS = [
 ];
 
 export type TLDRClient = (typeof SUPPORTED_CLIENTS)[number];
+
+export interface ParseOptions {
+	client?: TLDRClient;
+	binary?: string;
+}

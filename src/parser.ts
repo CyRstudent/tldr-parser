@@ -4,33 +4,53 @@ export default function parseRaw(
 	stdoutRaw: string,
 	stripUsage: boolean = true,
 ): TLDRInfo {
-	const lines = stdoutRaw.split("\n");
+	const lines = stdoutRaw.split(/\r?\n/);
 	let name = "";
 	const descLines: string[] = [];
 	const examples: Example[] = [];
 
-	let currentExample = "";
+	let currentExample: string | null = null;
+
+	function flushExample(): void {
+		if (currentExample !== null) {
+			examples.push({
+				description: currentExample,
+				usage: "",
+			});
+			currentExample = null;
+		}
+	}
+
 	for (let l of lines) {
 		l = l.trim();
 		if (!l) continue;
+
 		if (l.startsWith("# ")) {
-			name = l.replace(/^#\s+/, "");
-		} else if (l.startsWith("> ")) {
-			descLines.push(l.replace(/^>\s+/, ""));
+			flushExample();
+			if (!name) {
+				name = l.replace(/^#\s+/, "").trim();
+			}
+		} else if (l.startsWith(">")) {
+			flushExample();
+			descLines.push(l.replace(/^>\s?/, ""));
 		} else if (l.startsWith("- ")) {
-			currentExample = l.replace(/^-\s+/, "");
-		} else if (currentExample) {
+			flushExample();
+			currentExample = l.replace(/^-\s+/, "").trim();
+		} else if (currentExample !== null) {
+			const usage = stripUsage ? l.replace(/^`+|`+$/g, "").trim() : l;
 			examples.push({
 				description: currentExample,
-				usage: stripUsage ? l.replace(/^`+\`+$/, "").trim() : l,
+				usage,
 			});
-			currentExample = "";
+			currentExample = null;
 		}
 	}
-	const obj: TLDRInfo = {
-		name: name,
-		description: descLines.join("\n"),
-		examples: examples,
+
+	flushExample();
+
+	return {
+		name,
+		description: descLines.join("\n").trim(),
+		examples,
 	};
-	return obj;
 }

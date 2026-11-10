@@ -1,4 +1,4 @@
-import type { Example, TLDRInfo } from "./types";
+import type { Example, TLDRInfo } from "./types.js";
 
 import { execa } from "execa";
 

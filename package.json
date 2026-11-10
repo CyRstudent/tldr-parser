@@ -18,7 +18,7 @@
   },
   "author": "CyRstudent",
   "type": "module",
-  "main": "src/indexq.ts",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

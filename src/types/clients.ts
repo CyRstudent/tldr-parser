@@ -72,4 +72,9 @@ export interface ParseOptions {
 	 * @default 50
 	 */
 	maxChar?: number;
+	/**
+	 * Array of allowed non-alphanumeric characters in a query
+	 * @default ['+', '-']
+	 */
+	allowedNAChars?: string[];
 }

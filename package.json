@@ -1,5 +1,5 @@
 {
-	"name": "tldr-parser",
+	"name": "tldr-parser-ts",
 	"version": "0.0.0",
 	"description": "A TypeScript-based parser for the tldr CLI",
 	"keywords": [
@@ -8,13 +8,13 @@
 		"tldr",
 		"ts"
 	],
-	"homepage": "https://github.com/CyRstudent/tldr-parser#readme",
+	"homepage": "https://github.com/CyRstudent/tldr-parser-ts#readme",
 	"bugs": {
-		"url": "https://github.com/CyRstudent/tldr-parser/issues"
+		"url": "https://github.com/CyRstudent/tldr-parser-ts/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/CyRstudent/tldr-parser.git"
+		"url": "git+https://github.com/CyRstudent/tldr-parser-ts.git"
 	},
 	"author": "cyrstudent",
 	"type": "module",

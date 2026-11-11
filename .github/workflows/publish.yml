@@ -29,7 +29,6 @@ jobs:
               with:
                   node-version: lts/*
                   cache: pnpm
-                  registry-url: 'https://registry.npmjs.org'
 
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
@@ -44,4 +43,4 @@ jobs:
               run: pnpm build
 
             - name: Publish
-              run: npm publish --access public
+              run: pnpm publish --access public

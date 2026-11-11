@@ -25,7 +25,6 @@ export default async function parse(
 	query: string,
 	options: ParseOptions = {},
 ): Promise<TLDRInfo> {
-	// Step 1: Check for possible injections
 	const sanitized = query.trim();
 	if (!sanitized) {
 		throw new InvalidQueryError(query, 'Query cannot be empty');

@@ -1,31 +1,31 @@
 {
 	"compilerOptions": {
-	// Dirs
-	"rootDir": "./src",
-	"outDir": "./dist",
+		// Dirs
+		"rootDir": "./src",
+		"outDir": "./dist",
 
-	// Env settings
-	"module": "nodenext",
-	"target": "es2022",
-	"lib": ["ES2022"],
-	"types": ["node"],
+		// Env settings
+		"module": "nodenext",
+		"target": "es2022",
+		"lib": ["ES2022"],
+		"types": ["node"],
 
-	// Outputs
-	"declaration": true,
-	"declarationMap": true,
-	"sourceMap": true,
+		// Outputs
+		"declaration": true,
+		"declarationMap": true,
+		"sourceMap": true,
 
-	// Typecheck
-	"strict": true,
-	"noUncheckedIndexedAccess": true,
-	"exactOptionalPropertyTypes": true,
+		// Typecheck
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"exactOptionalPropertyTypes": true,
 
-	// ESM & Tooling compatibility
-	"verbatimModuleSyntax": true,
-	"isolatedModules": true,
-	"noUncheckedSideEffectImports": true,
-	"moduleDetection": "force",
-	"skipLibCheck": true,
+		// ESM & Tooling compatibility
+		"verbatimModuleSyntax": true,
+		"isolatedModules": true,
+		"noUncheckedSideEffectImports": true,
+		"moduleDetection": "force",
+		"skipLibCheck": true
 	},
-	"include": ["src/**/*"],
+	"include": ["src/**/*"]
 }

@@ -1,57 +1,57 @@
 {
-  "name": "tldr-parser",
-  "version": "0.0.0",
-  "description": "A TypeScript-based parser for the tldr CLI",
-  "keywords": [
-    "parser",
-    "cli",
-    "tldr",
-    "ts"
-  ],
-  "homepage": "https://github.com/CyRstudent/tldr-parser#readme",
-  "bugs": {
-    "url": "https://github.com/CyRstudent/tldr-parser/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CyRstudent/tldr-parser.git"
-  },
-  "author": "CyRstudent",
-  "type": "module",
-  "main": "dist/index.js",
-  "scripts": {
-    "test": "tsx src/test.ts",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "check": "pnpm format:check && pnpm lint",
-    "fix": "pnpm format && pnpm lint:fix",
-    "typecheck": "tsc --noEmit"
-  },
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "12.18.0",
-      "onFail": "download"
-    }
-  },
-  "packageManager": "pnpm@12.18.0",
-  "dependencies": {
-    "execa": "^10.2.1"
-  },
-  "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@types/node": "^26.6.6",
-    "eslint": "^10.14.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.7",
-    "globals": "^17.14.0",
-    "jiti": "^2.7.0",
-    "prettier": "^3.9.10",
-    "tsx": "^4.23.15",
-    "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "@typescript/native": "npm:typescript@^7.0.2",
-    "typescript-eslint": "^8.72.2"
-  }
+	"name": "tldr-parser",
+	"version": "0.0.0",
+	"description": "A TypeScript-based parser for the tldr CLI",
+	"keywords": [
+		"parser",
+		"cli",
+		"tldr",
+		"ts"
+	],
+	"homepage": "https://github.com/CyRstudent/tldr-parser#readme",
+	"bugs": {
+		"url": "https://github.com/CyRstudent/tldr-parser/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/CyRstudent/tldr-parser.git"
+	},
+	"author": "CyRstudent",
+	"type": "module",
+	"main": "dist/index.js",
+	"scripts": {
+		"test": "tsx src/test.ts",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"check": "pnpm format:check && pnpm lint",
+		"fix": "pnpm format && pnpm lint:fix",
+		"typecheck": "tsc --noEmit"
+	},
+	"devEngines": {
+		"packageManager": {
+			"name": "pnpm",
+			"version": "12.18.0",
+			"onFail": "download"
+		}
+	},
+	"packageManager": "pnpm@12.18.0",
+	"dependencies": {
+		"execa": "^10.2.1"
+	},
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"@types/node": "^26.6.6",
+		"eslint": "^10.14.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-prettier": "^5.5.7",
+		"globals": "^17.14.0",
+		"jiti": "^2.7.0",
+		"prettier": "^3.9.10",
+		"tsx": "^4.23.15",
+		"typescript": "npm:@typescript/typescript6@^6.0.2",
+		"@typescript/native": "npm:typescript@^7.0.2",
+		"typescript-eslint": "^8.72.2"
+	}
 }

@@ -1,11 +1,11 @@
-import type { TLDRInfo, Example } from "./types/index.js";
+import type { TLDRInfo, Example } from './types/index.js';
 
 export default function parseRaw(
 	stdoutRaw: string,
 	stripUsage: boolean = true,
 ): TLDRInfo {
 	const lines = stdoutRaw.split(/\r?\n/);
-	let name = "";
+	let name = '';
 	const descLines: string[] = [];
 	const examples: Example[] = [];
 
@@ -15,7 +15,7 @@ export default function parseRaw(
 		if (currentExample !== null) {
 			examples.push({
 				description: currentExample,
-				usage: "",
+				usage: '',
 			});
 			currentExample = null;
 		}
@@ -23,21 +23,23 @@ export default function parseRaw(
 
 	for (let l of lines) {
 		l = l.trim();
-		if (!l) continue;
+		if (!l) {
+			continue;
+		}
 
-		if (l.startsWith("# ")) {
+		if (l.startsWith('# ')) {
 			flushExample();
 			if (!name) {
-				name = l.replace(/^#\s+/, "").trim();
+				name = l.replace(/^#\s+/, '').trim();
 			}
-		} else if (l.startsWith(">")) {
+		} else if (l.startsWith('>')) {
 			flushExample();
-			descLines.push(l.replace(/^>\s?/, ""));
-		} else if (l.startsWith("- ")) {
+			descLines.push(l.replace(/^>\s?/, ''));
+		} else if (l.startsWith('- ')) {
 			flushExample();
-			currentExample = l.replace(/^-\s+/, "").trim();
+			currentExample = l.replace(/^-\s+/, '').trim();
 		} else if (currentExample !== null) {
-			const usage = stripUsage ? l.replace(/^`+|`+$/g, "").trim() : l;
+			const usage = stripUsage ? l.replace(/^`+|`+$/g, '').trim() : l;
 			examples.push({
 				description: currentExample,
 				usage,
@@ -50,7 +52,7 @@ export default function parseRaw(
 
 	return {
 		name,
-		description: descLines.join("\n").trim(),
+		description: descLines.join('\n').trim(),
 		examples,
 	};
 }

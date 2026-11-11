@@ -1,4 +1,4 @@
-export const SUPPORTED_CLIENTS = ["tlrc", "pythoncli"] as const;
+export const SUPPORTED_CLIENTS = ['tlrc', 'pythoncli'] as const;
 
 export type TLDRClient = (typeof SUPPORTED_CLIENTS)[number];
 
@@ -13,13 +13,13 @@ function checkLowerCase(q: string, check: string): boolean {
 
 export const CLIENT_STRATEGIES: Record<TLDRClient, ClientStrategy> = {
 	tlrc: {
-		buildArgs: (args) => ["-R", "--", ...args],
+		buildArgs: (args) => ['-R', '--', ...args],
 		isPageNotFound: (errmsg) =>
-			checkLowerCase(errmsg, "error: page not found"),
+			checkLowerCase(errmsg, 'error: page not found'),
 	},
 	pythoncli: {
-		buildArgs: (args) => ["--markdown", "--", ...args],
-		isPageNotFound: (errmsg) => checkLowerCase(errmsg, "page not found"),
+		buildArgs: (args) => ['--markdown', '--', ...args],
+		isPageNotFound: (errmsg) => checkLowerCase(errmsg, 'page not found'),
 	},
 };
 

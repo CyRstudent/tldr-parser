@@ -1,4 +1,4 @@
-import { TLDError } from "./tldr.js";
+import { TLDError } from './tldr.js';
 
 export class InvalidQueryError extends TLDError {
 	public readonly query: string;

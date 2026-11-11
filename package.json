@@ -16,7 +16,7 @@
 		"type": "git",
 		"url": "git+https://github.com/CyRstudent/tldr-parser.git"
 	},
-	"author": "CyRstudent",
+	"author": "cyrstudent",
 	"type": "module",
 	"main": "dist/index.js",
 	"scripts": {

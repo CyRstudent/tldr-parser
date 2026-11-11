@@ -78,3 +78,5 @@ export interface ParseOptions {
 	 */
 	allowedNAChars?: string[];
 }
+
+export type ResolvedOptions = Required<ParseOptions>;

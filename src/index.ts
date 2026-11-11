@@ -4,7 +4,6 @@ import parseRaw from './parser.js';
 // Types and interfaces
 import {
 	CLIENT_STRATEGIES,
-	type TLDRClient,
 	type TLDRInfo,
 	type ParseOptions,
 } from './types/index.js';

@@ -6,6 +6,7 @@ import {
 	CLIENT_STRATEGIES,
 	type TLDRInfo,
 	type ParseOptions,
+	type ResolvedOptions,
 } from './types/index.js';
 
 // Custom error classes
@@ -25,6 +26,13 @@ export default async function parse(
 	query: string,
 	options: ParseOptions = {},
 ): Promise<TLDRInfo> {
+	const resOptions: ResolvedOptions = {
+		client: options.client ?? 'tlrc',
+		binary: options.binary ?? 'tldr',
+		stripUsage: options.stripUsage ?? true,
+		maxChar: options.maxChar ?? 50,
+		allowedNAChars: options.allowedNAChars ?? ['+', '-'],
+	};
 	const sanitized = query.trim();
 	if (!sanitized) {
 		throw new InvalidQueryError(query, 'Query cannot be empty');

@@ -54,14 +54,14 @@ export default async function parse(
 			'The query must not start with a hyphen',
 		);
 	}
-	const strat = CLIENT_STRATEGIES[options.client];
+	const strat = CLIENT_STRATEGIES[resOptions.client];
 
 	const queryArgs = sanitized.split(/\s+/);
 	const args = strat.buildArgs(queryArgs);
 
 	let output;
 	try {
-		output = await execa(options.binary, args);
+		output = await execa(resOptions.binary, args);
 	} catch (err) {
 		if (err instanceof ExecaError) {
 			if (strat.isPageNotFound(err.message)) {
@@ -70,7 +70,7 @@ export default async function parse(
 		}
 		throw err;
 	}
-	return parseRaw(output.stdout, options.stripUsage ?? true);
+	return parseRaw(output.stdout, resOptions.stripUsage);
 }
 
 export * from './types/index.js';

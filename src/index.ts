@@ -44,7 +44,7 @@ export default async function parse(
 	const escaped = resOptions.allowedNAChars.map((c) =>
 		c.replace(/[-[\]\\^]/g, '\\$&'),
 	);
-	const pattern = new RegExp(`^[a-zA-Z0-9_\\-+\\s${escaped.join('')}]$`);
+	const pattern = new RegExp(`^[a-zA-Z0-9_\\-+\\s${escaped.join('')}]+$`);
 	if (!pattern.test(sanitized)) {
 		throw new InvalidQueryError(query, 'Query contains invalid characters');
 	}

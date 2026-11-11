@@ -1,6 +1,6 @@
 {
 	"name": "tldr-parser-ts",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"description": "A TypeScript-based parser for the tldr CLI",
 	"keywords": [
 		"parser",

@@ -67,4 +67,9 @@ export interface ParseOptions {
 	 * @default true
 	 */
 	stripUsage?: boolean;
+	/**
+	 * The max amount of characters allowed in a single query
+	 * @default 50
+	 */
+	maxChar?: number;
 }

@@ -27,7 +27,8 @@
 		"format:check": "prettier --check .",
 		"check": "pnpm format:check && pnpm lint",
 		"fix": "pnpm format && pnpm lint:fix",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsc --noEmit",
+		"build": "tsc"
 	},
 	"devEngines": {
 		"packageManager": {

@@ -20,7 +20,7 @@
 	"type": "module",
 	"main": "dist/index.js",
 	"scripts": {
-		"test": "tsx src/test.ts",
+		"test": "vitest",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
 		"format": "prettier --write .",

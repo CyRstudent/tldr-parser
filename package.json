@@ -6,7 +6,8 @@
 		"parser",
 		"cli",
 		"tldr",
-		"ts"
+		"ts",
+		"typescript"
 	],
 	"homepage": "https://github.com/CyRstudent/tldr-parser-ts#readme",
 	"bugs": {
@@ -16,11 +17,29 @@
 		"type": "git",
 		"url": "git+https://github.com/CyRstudent/tldr-parser-ts.git"
 	},
+	"license": "MIT",
 	"author": "cyrstudent",
 	"type": "module",
-	"main": "dist/index.js",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE"
+	],
+	"engines": {
+		"node": ">=22"
+	},
 	"scripts": {
+		"build": "tsc",
 		"test": "vitest",
+		"test:run": "vitest run",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
 		"format": "prettier --write .",
@@ -28,7 +47,7 @@
 		"check": "pnpm format:check && pnpm lint",
 		"fix": "pnpm format && pnpm lint:fix",
 		"typecheck": "tsc --noEmit",
-		"build": "tsc"
+		"prepublishOnly": "pnpm typecheck && pnpm test:run && pnpm build"
 	},
 	"devEngines": {
 		"packageManager": {

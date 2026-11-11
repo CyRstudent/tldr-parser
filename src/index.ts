@@ -15,6 +15,12 @@ import { execa, ExecaError } from 'execa';
 
 const reg = /^[a-zA-Z0-9_\-+\s]{1,50}$/;
 
+/**
+ * The default function of the package, parsing the output of the tldr command
+ * @param query The command/subcommand to parse
+ * @param options Options to specify client used, binary path to the tool and whether stripped examples are wanted
+ * @returns A promise containing the parsed output as a TLDRInfo object.
+ */
 export default async function parse(
 	query: string,
 	options: ParseOptions = {},

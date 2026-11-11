@@ -18,9 +18,7 @@ const config: ConfigArray = [
 				...globals.node,
 			},
 			parserOptions: {
-				projectService: {
-					allowDefaultProject: ['eslint.config.mts'],
-				},
+				project: ['./tsconfig.json', './tsconfig.test.json'],
 				tsconfigRootDir: import.meta.dirname,
 			},
 		},

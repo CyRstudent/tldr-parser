@@ -1,0 +1,7 @@
+{
+	"extends": "./tsconfig.json",
+	"files": ["src/index.test.ts", "src/parser.test.ts", "eslint.config.mts"],
+	"compilerOptions": {
+		"noEmit": true
+	}
+}

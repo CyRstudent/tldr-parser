@@ -19,3 +19,20 @@ npm install tldr-parser-ts
 # pnpm
 pnpm install tldr-parser-ts
 ```
+
+## Usage example
+
+Please, make sure you have a TLDR client available in your machine. This snippet works with `tlrc`
+
+```ts
+import parse from 'tldr-parser-ts';
+
+async function main() {
+	const res = await parse('git merge', {
+		stripUsage: false,
+	});
+	console.log(res);
+}
+
+void main();
+```

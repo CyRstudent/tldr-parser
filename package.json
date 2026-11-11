@@ -20,7 +20,14 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "test": "tsx src/test.ts"
+    "test": "tsx src/test.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "pnpm format:check && pnpm lint",
+    "fix": "pnpm format && pnpm lint:fix",
+    "typecheck": "tsc --noEmit"
   },
   "devEngines": {
     "packageManager": {

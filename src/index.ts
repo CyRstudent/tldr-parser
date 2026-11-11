@@ -14,8 +14,6 @@ import { InvalidQueryError, PageNotFoundError } from './errors/index.js';
 
 import { execa, ExecaError } from 'execa';
 
-const reg = /^[a-zA-Z0-9_\-+\s]{1,50}$/;
-
 /**
  * The default function of the package, parsing the output of the tldr command
  * @param query The command/subcommand to parse
@@ -37,25 +35,24 @@ export default async function parse(
 	if (!sanitized) {
 		throw new InvalidQueryError(query, 'Query cannot be empty');
 	}
-
-	if (!reg.test(sanitized)) {
+	if (sanitized.length > resOptions.maxChar) {
 		throw new InvalidQueryError(
 			query,
-			'The query must be alphanumeric (hyphens and + allowed), and between 1 and 50 chars',
+			`Query exceeds the ${resOptions.maxChar} character(s) limit`,
 		);
+	}
+	const escaped = resOptions.allowedNAChars.map((c) =>
+		c.replace(/[-[\]\\^]/g, '\\$&'),
+	);
+	const pattern = new RegExp(`^[a-zA-Z0-9_\\-+\\s${escaped.join('')}]$`);
+	if (!pattern.test(sanitized)) {
+		throw new InvalidQueryError(query, 'Query contains invalid characters');
 	}
 	if (sanitized.startsWith('-')) {
 		throw new InvalidQueryError(
 			query,
 			'The query must not start with a hyphen',
 		);
-	}
-
-	if (!options.client) {
-		options.client = 'tlrc';
-	}
-	if (!options.binary) {
-		options.binary = 'tldr';
 	}
 	const strat = CLIENT_STRATEGIES[options.client];
 
